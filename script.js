@@ -1,20 +1,21 @@
-const toggle = document.getElementById('toggleTheme');
+const toggleButton = document.getElementById('theme-toggle');
 const body = document.body;
 
-// Load saved theme from localStorage
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme === 'dark') {
+// Check saved theme preference
+if (localStorage.getItem('theme') === 'dark') {
   body.classList.add('dark');
-  toggle.checked = true;
 }
 
-// Event listener for toggle
-toggle.addEventListener('change', () => {
-  if (toggle.checked) {
-    body.classList.add('dark');
-    localStorage.setItem('theme', 'dark');
-  } else {
-    body.classList.remove('dark');
-    localStorage.setItem('theme', 'light');
-  }
+// Toggle theme and save preference
+toggleButton.addEventListener('click', () => {
+  body.classList.toggle('dark');
+  const theme = body.classList.contains('dark') ? 'dark' : 'light';
+  localStorage.setItem('theme', theme);
+});
+
+// Optional: Handle form submission
+document.getElementById('feedback-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  alert("Thank you for your feedback!");
+  e.target.reset();
 });
